@@ -1,0 +1,10 @@
+﻿<div class="container-fluid">
+    <h2 class="mt-3 mb-0 text-muted">Thank you for your valuable feedback!
+    @{
+        if (TempData["ContactMe"] != null && (bool)TempData["ContactMe"] == true)
+        {
+            <text> We'll contact you soon!</text>
+        }
+    }
+    </h2>
+</div>

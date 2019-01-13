@@ -7,12 +7,14 @@ namespace PieShop.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(IPieRepository pieRepository)
+        public HomeController(IPieRepository pieRepository, IFeedbackRepository feedbackRepository)
         {
             PieRepository = pieRepository;
+            FeedbackRepository = feedbackRepository;
         }
 
         private IPieRepository PieRepository { get; }
+        private IFeedbackRepository FeedbackRepository { get; }
 
         public IActionResult Index()
         {
