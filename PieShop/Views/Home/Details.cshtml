@@ -1,0 +1,18 @@
+﻿@model Pie
+
+<div class="container-fluid">
+    <h2 class="mt-3 mb-0 text-muted d-inline-block">@Model.Name</h2>
+    <h2 class="mt-3 mb-0 text-muted float-right">@Model.Price.ToString("c")</h2>
+</div>
+
+<div class="card mt-3 mb-5" style="width: 100%;">
+    <img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Name" />
+    <div class="card-body">
+        <h5 class="card-subtitle mb-2 text-muted float-right">@Model.Price.ToString("c")</h5>
+        <h3 class="card-title">@Model.Name</h3>
+        <p class="card-text">@Model.ShortDescription</p>
+    </div>
+</div>
+
+
+@*<img src="@Model.ImageUrl" class="img-fluid" alt="@Model.Name" style="width: 100%;">*@

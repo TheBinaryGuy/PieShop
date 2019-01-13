@@ -259,3 +259,27 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# ignore appsettings
+**/appsettings.development.json
+**/appsettings.staging.json
+**/appsettings.production.json
+**/appsettings.Development.json
+**/appsettings.Staging.json
+**/appsettings.Production.json
+
+# ignore connectionstrings
+**/connectionstrings.development.json
+**/connectionstrings.staging.json
+**/connectionstrings.production.json
+**/connectionstrings.Development.json
+**/connectionstrings.Staging.json
+**/connectionstrings.Production.json
+
+# ignore mailsettings
+**/mailsettings.development.json
+**/mailsettings.staging.json
+**/mailsettings.production.json
+**/mailsettings.Development.json
+**/mailsettings.Staging.json
+**/mailsettings.Production.json
