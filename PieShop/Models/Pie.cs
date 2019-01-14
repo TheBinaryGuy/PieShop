@@ -2,14 +2,18 @@
 {
     public class Pie
     {
-        public int Id { get; set; }
+        public int PieId { get; set; }
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
+        public string AlergyInformation { get; set; }
         public decimal Price { get; set; }
         public string ImageUrl { get; set; }
         public string ImageThumbnailUrl { get; set; }
         public bool IsPieOfTheWeek { get; set; }
         public bool IsInStock { get; set; }
+
+        public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

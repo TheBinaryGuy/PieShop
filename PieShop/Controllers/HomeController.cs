@@ -7,22 +7,21 @@ namespace PieShop.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(IPieRepository pieRepository, IFeedbackRepository feedbackRepository)
+        public HomeController(IPieRepository pieRepository, ICategoryRepository categoryRepository)
         {
+            CategoryRepository = categoryRepository;
             PieRepository = pieRepository;
-            FeedbackRepository = feedbackRepository;
         }
 
+        private ICategoryRepository CategoryRepository { get; }
         private IPieRepository PieRepository { get; }
-        private IFeedbackRepository FeedbackRepository { get; }
 
         public IActionResult Index()
         {
-            var pies = PieRepository.GetAllPies().OrderBy(p => p.Name);
             var model = new HomeViewModel
             {
                 Title = "Pie Shop",
-                Pies = pies.ToList()
+                Pies = PieRepository.Pies.OrderBy(p => p.Name).ToList()
             };
             return View(model);
         }

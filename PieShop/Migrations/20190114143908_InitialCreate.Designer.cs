@@ -10,8 +10,8 @@ using PieShop.Models;
 namespace PieShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190113184741_IdentityAdded")]
-    partial class IdentityAdded
+    [Migration("20190114143908_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,6 +182,21 @@ namespace PieShop.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("PieShop.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("PieShop.Models.Feedback", b =>
                 {
                     b.Property<int>("FeedbackId")
@@ -209,9 +224,13 @@ namespace PieShop.Migrations
 
             modelBuilder.Entity("PieShop.Models.Pie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PieId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AlergyInformation");
+
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("ImageThumbnailUrl");
 
@@ -229,7 +248,9 @@ namespace PieShop.Migrations
 
                     b.Property<string>("ShortDescription");
 
-                    b.HasKey("Id");
+                    b.HasKey("PieId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Pies");
                 });
@@ -276,6 +297,14 @@ namespace PieShop.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PieShop.Models.Pie", b =>
+                {
+                    b.HasOne("PieShop.Models.Category", "Category")
+                        .WithMany("Pies")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -11,7 +11,7 @@
             <img class="card-img-top" src="@pie.ImageThumbnailUrl" alt="@pie.Name" />
             <div class="card-body">
                 <h3 class="card-title">
-                    <a asp-controller="Home" asp-action="Details" asp-route-id="@pie.Id">@pie.Name</a>
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@pie.PieId">@pie.Name</a>
                 </h3>
                 <h5 class="card-subtitle mb-2 text-muted">@pie.Price.ToString("c")</h5>
                 <p class="card-text">@pie.ShortDescription</p>
