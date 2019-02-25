@@ -1,27 +1,34 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PieShop.Models;
+using System.Threading.Tasks;
 
 namespace PieShop.Controllers
 {
     [Authorize]
     public class FeedbackController : Controller
     {
-        public FeedbackController(IFeedbackRepository feedbackRepository)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public FeedbackController(UserManager<IdentityUser> userManager, IFeedbackRepository feedbackRepository)
         {
+            _userManager = userManager;
             FeedbackRepository = feedbackRepository;
         }
         
         private IFeedbackRepository FeedbackRepository { get; }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var model = new Feedback();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var model = new Feedback { Name = user?.UserName, Email = user?.Email };
             return View(model);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(Feedback feedback)
         {
             if (!ModelState.IsValid)

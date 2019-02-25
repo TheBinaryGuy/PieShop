@@ -24,6 +24,7 @@ namespace PieShop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
@@ -58,6 +59,7 @@ namespace PieShop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
             if (!ModelState.IsValid)
@@ -70,6 +72,7 @@ namespace PieShop.Controllers
             
             if (result.Succeeded)
             {
+                await _signInManager.SignInAsync(user, false);
                 if (registerViewModel.ReturnUrl != null)
                 {
                     return LocalRedirect(registerViewModel.ReturnUrl);
